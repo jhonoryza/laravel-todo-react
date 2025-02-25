@@ -6,11 +6,11 @@ class PolicyController extends Controller
 {
     public function privacy()
     {
-        return inertia()->render('Policy/Privacy');
+        return inertia()->render('policy/privacy');
     }
 
     public function terms()
     {
-        return inertia()->render('Policy/Terms');
+        return inertia()->render('policy/terms');
     }
 }

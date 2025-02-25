@@ -7,6 +7,8 @@ use App\Enums\Type;
 use App\Http\Requests\StoreTodoLinkRequest;
 use App\Http\Requests\UpdateTodoLinkRequest;
 use App\Models\Todo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class TodoLinkController extends Controller
@@ -14,20 +16,29 @@ class TodoLinkController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $page = $request->page ?? 1;
+        $perPage = $request->size ?? 5;
         Gate::authorize('viewAny', Todo::class);
         $data = Todo::query()
-            ->where('user_id', auth()->user()->id)
+            ->where('user_id', Auth::user()->id)
             ->where('type', Type::LINK)
             ->orderBy('status', 'desc')
             ->orderBy('id', 'asc')
-            ->simplePaginate(5)
+            ->paginate(page: $page, perPage: $perPage)
             ->withQueryString();
 
         return inertia()
-            ->render('Todos/Link', [
-                'todos' => inertia()->always(fn() => $data),
+            ->render('links/page', [
+                'todos' => inertia()->always(fn() => $data->items()),
+                'pagination' => [
+                    'baseurl' => 'todolinks',
+                    'total' => $data->total(),
+                    'per_page' => $data->perPage(),
+                    'current_page' => $data->currentPage(),
+                    'last_page' => $data->lastPage(),
+                ],
             ]);
     }
 
@@ -46,7 +57,7 @@ class TodoLinkController extends Controller
     {
         Gate::authorize('create', Todo::class);
         $data = array_merge($request->validated(), [
-            'user_id' => auth()->user()->id,
+            'user_id' => Auth::user()->id,
             'status' => Status::TODO,
         ]);
         Todo::query()

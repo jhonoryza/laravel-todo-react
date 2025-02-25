@@ -13,7 +13,8 @@ class TodoPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->email_verified_at != null;
+        return true;
+        // return $user->email_verified_at != null;
     }
 
     /**
@@ -29,7 +30,8 @@ class TodoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->email_verified_at != null;
+        return true;
+        //return $user->email_verified_at != null;
     }
 
     /**
@@ -53,7 +55,7 @@ class TodoPolicy
      */
     public function restore(User $user, Todo $todo): bool
     {
-        return false;
+        return $todo->user_id === $user->id;
     }
 
     /**

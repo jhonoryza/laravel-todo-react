@@ -8,6 +8,7 @@ use App\Http\Requests\StoreTodoNoteRequest;
 use App\Http\Requests\UpdateTodoNoteRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class TodoNoteController extends Controller
@@ -19,7 +20,7 @@ class TodoNoteController extends Controller
     {
         Gate::authorize('viewAny', Todo::class);
         $data = Todo::query()
-            ->where('user_id', auth()->user()->id)
+            ->where('user_id', Auth::user()->id)
             ->where('type', Type::NOTES)
             ->orderBy('status', 'desc')
             ->orderBy('id', 'asc')
@@ -27,7 +28,7 @@ class TodoNoteController extends Controller
             ->withQueryString();
 
         return inertia()
-            ->render('Todos/Note', [
+            ->render('todos/note', [
                 'todos' => inertia()->always(fn() => $data),
             ]);
     }
@@ -47,7 +48,7 @@ class TodoNoteController extends Controller
     {
         Gate::authorize('create', Todo::class);
         $data = array_merge($request->validated(), [
-            'user_id' => auth()->user()->id,
+            'user_id' => Auth::user()->id,
             'status' => Status::TODO,
             'type' => Type::NOTES,
         ]);
