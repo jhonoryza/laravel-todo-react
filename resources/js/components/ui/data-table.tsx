@@ -14,7 +14,7 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({ columns, data, pagination }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
-        data: data,
+        data,
         columns,
         manualPagination: true,
         getCoreRowModel: getCoreRowModel(),
@@ -61,7 +61,9 @@ export function DataTable<TData, TValue>({ columns, data, pagination }: DataTabl
                             table.getRowModel().rows.map((row) => (
                                 <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                                        <TableCell key={cell.id}>
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                        </TableCell>
                                     ))}
                                 </TableRow>
                             ))

@@ -38,6 +38,12 @@
     --color-destructive: var(--destructive);
     --color-destructive-foreground: var(--destructive-foreground);
 
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+
+    --color-info: var(--info);
+    --color-info-foreground: var(--info-foreground);
+
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
@@ -94,6 +100,10 @@
     --accent-foreground: hsl(0, 0%, 9%);
     --destructive: hsl(0, 84.2%, 60.2%);
     --destructive-foreground: hsl(0, 0%, 98%);
+    --success: hsl(147, 96.2%, 42.2%);
+    --success-foreground: hsl(0, 0%, 98%);
+    --info: hsl(204, 96.2%, 42.2%);
+    --info-foreground: hsl(0, 0%, 98%);
     --border: hsl(0, 0%, 92.8%);
     --input: hsl(0, 0%, 89.8%);
     --ring: hsl(0, 0%, 3.9%);
@@ -130,6 +140,12 @@
     --accent-foreground: hsl(0, 0%, 98%);
     --destructive: hsl(0, 84%, 60%);
     --destructive-foreground: hsl(0, 0%, 98%);
+    --success: hsl(147, 92%, 56%);
+    --success-foreground: hsl(0, 0%, 98%);
+    --success: hsl(147, 96%, 42%);
+    --success-foreground: hsl(0, 0%, 98%);
+    --info: hsl(204, 96%, 42%);
+    --info-foreground: hsl(0, 0%, 98%);
     --border: hsl(0, 0%, 14.9%);
     --input: hsl(0, 0%, 14.9%);
     --ring: hsl(0, 0%, 83.1%);
@@ -146,14 +162,4 @@
     --sidebar-accent-foreground: hsl(240, 4.8%, 95.9%);
     --sidebar-border: hsl(0, 0%, 15.9%);
     --sidebar-ring: hsl(217.2, 91.2%, 59.8%);
-}
-
-@layer base {
-    * {
-        @apply border-border outline-ring/50;
-    }
-
-    body {
-        @apply bg-background text-foreground;
-    }
 }

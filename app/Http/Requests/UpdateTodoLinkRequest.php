@@ -24,6 +24,8 @@ class UpdateTodoLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => ['required', 'min:2'],
+            'url' => ['required', 'min:2', 'url'],
             'status' => ['required', Rule::enum(Status::class)],
         ];
     }
