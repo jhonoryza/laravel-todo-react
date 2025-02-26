@@ -19,17 +19,28 @@ class TodoNoteController extends Controller
     public function index()
     {
         Gate::authorize('viewAny', Todo::class);
+
+        $page = $request->page ?? 1;
+        $perPage = $request->size ?? 10;
+
         $data = Todo::query()
             ->where('user_id', Auth::user()->id)
             ->where('type', Type::NOTES)
             ->orderBy('status', 'desc')
             ->orderBy('id', 'asc')
-            ->simplePaginate(5)
+            ->paginate(page: $page, perPage: $perPage)
             ->withQueryString();
 
         return inertia()
-            ->render('todos/note', [
-                'todos' => inertia()->always(fn() => $data),
+            ->render('notes/page', [
+                'todos' => inertia()->always(fn() => $data->items()),
+                'pagination' => [
+                    'baseurl' => 'todonotes',
+                    'total' => $data->total(),
+                    'per_page' => $data->perPage(),
+                    'current_page' => $data->currentPage(),
+                    'last_page' => $data->lastPage(),
+                ],
             ]);
     }
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateTodoNoteRequest extends FormRequest
 {
@@ -24,6 +26,7 @@ class UpdateTodoNoteRequest extends FormRequest
         return [
             'name' => ['required', 'min:2'],
             'notes' => ['required', 'min:2'],
+            'status' => ['required', Rule::enum(Status::class)],
         ];
     }
 }
