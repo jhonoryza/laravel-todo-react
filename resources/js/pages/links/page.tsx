@@ -24,8 +24,8 @@ export default function Page({ todos, pagination }: PaginationProps) {
             <Head title="Links" />
 
             <div className="px-4 py-2">
-                <div className="flex-1 md:max-w-2xl">
-                    <section className="max-w-xl space-y-2">
+                <div className="flex-1">
+                    <section className="space-y-2">
                         <div className="flex items-center justify-between">
                             {/* heading section */}
                             <Heading title="Links" description="Manage your learning todo links" />

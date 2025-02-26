@@ -2,6 +2,7 @@ import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { useForm } from '@inertiajs/react';
 import { FilePlus } from 'lucide-react';
 import { FormEventHandler, useRef } from 'react';
@@ -14,7 +15,7 @@ const AddForm = () => {
     });
 
     const nameInput = useRef<HTMLInputElement>(null);
-    const notesInput = useRef<HTMLInputElement>(null);
+    const notesInput = useRef<HTMLTextAreaElement>(null);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -44,7 +45,7 @@ const AddForm = () => {
                     <FilePlus />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="max-w-4xl">
                 <DialogHeader>
                     <DialogTitle className="font-bold">Add Note</DialogTitle>
                     <DialogDescription>Click save when you're done.</DialogDescription>
@@ -65,10 +66,11 @@ const AddForm = () => {
                         <InputError className="mt-2" message={errors.name} />
                     </div>
                     <div className="grid gap-2">
-                        <Input
+                        <Textarea
                             id="url"
                             ref={notesInput}
                             className="mt-1 block w-full"
+                            rows={20}
                             value={data.notes}
                             onChange={(e) => setData('notes', e.target.value)}
                             required
