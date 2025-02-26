@@ -134,7 +134,7 @@ const Actions = ({ row }: Props) => {
                             </div>
                         </div>
                         <DialogFooter>
-                            <Button disabled={processing}>Save changes</Button>
+                            <Button disabled={processing}>Save</Button>
                             {recentlySuccessful && <p className="animate-in text-sm text-neutral-600 ease-in">Saved</p>}
                         </DialogFooter>
                     </form>

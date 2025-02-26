@@ -19,7 +19,7 @@ class TodoLinkController extends Controller
     public function index(Request $request)
     {
         $page = $request->page ?? 1;
-        $perPage = $request->size ?? 5;
+        $perPage = $request->size ?? 10;
         Gate::authorize('viewAny', Todo::class);
         $data = Todo::query()
             ->where('user_id', Auth::user()->id)
