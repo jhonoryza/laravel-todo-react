@@ -8,11 +8,11 @@ COPY . ./
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-plugins --no-scripts --prefer-dist
 
 # Install Node.js and npm
-# RUN curl -fsSL https://nodejs.org/dist/v20.14.0/node-v20.14.0-linux-x64.tar.xz | tar -xJ -C /usr/local --strip-components=1
+RUN curl -fsSL https://nodejs.org/dist/v20.14.0/node-v20.14.0-linux-x64.tar.xz | tar -xJ -C /usr/local --strip-components=1
 
 # Install npm dependencies and build assets
-# RUN npm install
-# RUN npm run build
+RUN npm install
+RUN npm run build
 
 # Final stage
 FROM jhonoryza/frankenphp-pgsql:8.2
