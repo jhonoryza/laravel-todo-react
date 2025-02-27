@@ -1,0 +1,19 @@
+services:
+    laravel-todo-react:
+        image: 'jhonoryza/laravel-todo-react:latest'
+        restart: unless-stopped
+        container_name: laravel-todo-react
+        volumes:
+            - ./env:/app/.env
+        networks:
+            - tunnel_default
+            - postgres
+            - redis_default
+
+networks:
+    tunnel_default:
+        external: true
+    postgres:
+        external: true
+    redis_default:
+        external: true
