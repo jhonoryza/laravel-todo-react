@@ -24,13 +24,13 @@ jobs:
       with:
           buildx-version: latest
 
-    # - name: Build base image with push
-    #   run: |
-    #       docker buildx build \
-    #       --platform=linux/amd64 \
-    #       --output "type=image,push=true" \
-    #       --file ./Dockerfile . \
-    #       --tag jhonoryza/frankenphp-pgsql:8.2
+#     - name: Build base image with push
+#       run: |
+#           docker buildx build \
+#           --platform=linux/amd64 \
+#           --output "type=image,push=true" \
+#           --file ./Dockerfile . \
+#           --tag jhonoryza/frankenphp-pgsql:8.2
 
     - name: Build dockerfile (with push)
       run: |
@@ -40,22 +40,22 @@ jobs:
           --file ./production.Dockerfile . \
           --tag jhonoryza/laravel-todo-react:latest
 
-  deploy:
-    needs: build-docker-image
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Connect and run command on remote server
-      uses: and-fm/cloudflared-ssh-action@v3
-      with:
-        host: dell.labkita.my.id
-        username: root
-        private_key_filename: id_rsa
-        private_key_value: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
-        service_token_id: ${{ secrets.CLIENT_ID }}
-        service_token_secret: ${{ secrets.CLIENT_SECRET }}
-        commands: /media/server_data/docker/laravel-projects/deploy-learningtodo.sh
+#  deploy:
+#    needs: build-docker-image
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v4
+#
+#    - name: Connect and run command on remote server
+#      uses: and-fm/cloudflared-ssh-action@v3
+#      with:
+#        host: dell.labkita.my.id
+#        username: root
+#        private_key_filename: id_rsa
+#        private_key_value: ${{ secrets.SSH_PRIVATE_KEY }}
+#        port: 22
+#        service_token_id: ${{ secrets.CLIENT_ID }}
+#        service_token_secret: ${{ secrets.CLIENT_SECRET }}
+#        commands: /media/server_data/docker/laravel-projects/deploy-learningtodo.sh
